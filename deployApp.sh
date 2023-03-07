@@ -8,8 +8,15 @@ APP_DIR=/var/www/SimpleApacheApp
 
 cloneAndDeploy() {
     # clone the repo from github to /var/www/html/SimpleApacheApp
- 
+
     cd /var/www/ >> $LOG_FILE
+
+    # check if git is installed
+
+    if [ $(dpkg -l | grep git | wc -l) == 0 ]; then
+        apt-get install git -y >> $LOG_FILE
+    fi
+
     git clone https://github.com/LoaiMasri1/SimpleApacheApp.git
 
     # change the ownership of the directory to www-data:www-data
@@ -20,6 +27,12 @@ cloneAndDeploy() {
 
     chmod -R 755 $APP_DIR >> $LOG_FILE
 
+    # check if apache2 is installed
+
+    if [ $(dpkg -l | grep apache2 | wc -l) == 0 ]; then
+        echo "Installing apache2" >> $LOG_FILE
+        apt-get install apache2 -y >> $LOG_FILE
+    fi
 
     # delete the simpleApp.conf file from /etc/apache2/sites-available if it exists
 

@@ -3,11 +3,14 @@
 ### First Script
 #### Adding it to PATH variable
 
+lunixStatus -p -h -r
+
 - cd ~
 - mkdir bin
 - cp ~/cloud-computing/lunixStatuts.sh ~/bin/lunixStatuts
 - export PATH=$PATH:$HOME/bin
 - source ~/.bashrc
+
 
 ### Second Script
 #### Adding the script to crontab
